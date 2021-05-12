@@ -1,4 +1,6 @@
-import os, random, time
+import os
+import random
+import time
 from paho.mqtt import client as mqtt_client
 
 
@@ -24,16 +26,14 @@ def connect_mqtt():
 
 
 def publish(client, topic, msg):
-     msg_count = 0
-     while True:
-         time.sleep(1)
-         result = client.publish(topic, msg)
-         status = result[0]
-         if status == 0:
-             print(f"Send msg to topic `{topic}`")
-         else:
-             print(f"Failed to send message to topic {topic}")
-         msg_count += 1
+    while True:
+        time.sleep(1)
+        result = client.publish(topic, msg)
+        status = result[0]
+        if status == 0:
+            print(f"Send msg to topic `{topic}`")
+        else:
+            print(f"Failed to send message to topic {topic}")
 
 
 def run(topic, msg):
