@@ -21,11 +21,15 @@ def send_notification(data):
     for m in data["mobile_sensors"]:
         if m["battery"] <= 5:
             msg = f"Bateria do Mobile Sensor {m['name']} está baixa: {m['battery']}%. Recarregue."
-    if data["progress"] == 100:
+        if m["quality"] == "bad":
+            msg = f"O ambiente {m['name']} precisa ser purificado."
+
+
+    if data["progress"] == 100 and data["active"]:
         msg = f"Purificação concluída!"
 
     header = {"Content-Type": "application/json; charset=utf-8",
-            "Authorization": "Basic NGEwMGZmMjItY2NkNy0xMWUzLTk5ZDUtMDAwYzI5NDBlNjJj"}
+            "Authorization": f"Basic {os.getenv('ONESIGNAL_USER_TOKEN')}"}
 
     if msg: 
         payload = {"app_id": os.getenv("ONESIGNAL_TOKEN"),
