@@ -30,7 +30,7 @@ def send_notification(data):
     if msg: 
         payload = {"app_id": os.getenv("ONESIGNAL_TOKEN"),
             "include_player_ids": get_users_tokens(data["_id"]),
-            "contents": {"en": "msg"}}
+            "contents": {"en": msg}}
         req = requests.post("https://onesignal.com/api/v1/notifications", headers=header, data=json.dumps(payload))
         print(f"Sending notification: {msg}")
         print(req.status_code, req.reason)
