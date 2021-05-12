@@ -3,17 +3,15 @@ import json
 from broker.publish import run
 
 data = {
-    "device": {
+        "_id": 1,
         "type": "purifier",
         "battery": 50,
         "filter_status": "medium",
         "light_status": "good",
         "active": False,
-        "id": 1,
         "progress": 50,
         "mobile_sensors": [
             {
-                "name": "",
                 "type": "mobile_sensor",
                 "battery": 80,
                 "quality": "good",
@@ -30,15 +28,13 @@ data = {
                 "humidity": "54"
             },
             {
-                "name": "",
                 "type": "mobile_sensor",
                 "battery": 20,
                 "quality": "bad",
                 "active": False,
                 "id": 2,
                 "metrics": {
-                    "MP10": "15",
-                    "MP25": "8",
+                    "MP": "15",
                     "O2": "25",
                     "CO2": "2",
                     "NO2": "45",
@@ -48,7 +44,6 @@ data = {
                 "humidity": "53"
             }
         ]
-    }
 }
 
 run("data.purifier", json.dumps(data))

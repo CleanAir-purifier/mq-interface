@@ -33,7 +33,7 @@ def subscribe(client: mqtt_client):
         print(f"Received `{msg.payload.decode()}` from `{msg.topic}` topic")
         data = json.loads(msg.payload)
         data["datetime"] = datetime.datetime.now()
-        db.clean_air.update_one({"device.id": 1}, {"$set": data}, upsert=True)
+        db.clean_air.update_one({"_id": 1}, {"$set": data}, upsert=True)
         print("Payload saved in the database")
 
     client.subscribe(topic)
