@@ -5,7 +5,7 @@ from broker.publish import run
 data = {
         "_id": 1,
         "type": "purifier",
-        "battery": 50,
+        "battery": 5,
         "filter_status": "medium",
         "light_status": "good",
         "active": False,

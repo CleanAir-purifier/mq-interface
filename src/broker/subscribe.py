@@ -4,6 +4,7 @@ import os
 import json
 from paho.mqtt import client as mqtt_client
 
+from notifications import send_notification
 from settings import db
 
 broker = 'baboon.rmq.cloudamqp.com'
@@ -35,6 +36,7 @@ def subscribe(client: mqtt_client):
         data["datetime"] = datetime.datetime.now()
         db.clean_air.update_one({"_id": 1}, {"$set": data}, upsert=True)
         print("Payload saved in the database")
+        send_notification(data)
 
     client.subscribe(topic)
     client.on_message = on_message
